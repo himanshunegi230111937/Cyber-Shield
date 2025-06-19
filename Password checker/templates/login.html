@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="auth-container">
+    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="login-logo">
+    <h2>Login</h2>
+    <form method="post" autocomplete="off">
+      <div class="input-group">
+        <input type="text" name="username" placeholder="Username or Email" required>
+      </div>
+      <div class="input-group">
+         <input type="password" name="password" placeholder="Password" required id="password-input">
+         <input type="checkbox" id="toggle-password" style="margin-left:8px;">
+         <label for="toggle-password" style="font-size:0.95rem;cursor:pointer;">Show</label>
+      </div>
+      <button type="submit">Login</button>
+      <div class="switch-link">
+        Not a member? <a href="{{ url_for('register') }}">Signup now</a>
+      </div>
+    </form>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const pwdInput = document.getElementById('password-input');
+    const toggle = document.getElementById('toggle-password');
+    toggle.addEventListener('change', function() {
+      pwdInput.type = this.checked ? 'text' : 'password';
+    });
+  });
+</script>
+</body>
+</html>

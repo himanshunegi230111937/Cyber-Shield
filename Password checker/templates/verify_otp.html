@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify OTP</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Verify OTP</h2>
+    <form method="post">
+      <label>Enter OTP sent to your email:</label>
+      <input type="text" name="otp" required>
+      <button type="submit">Verify OTP</button>
+    </form>
+    <a href="{{ url_for('home') }}" class="back-link">Back to Home</a>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+</body>
+</html>
